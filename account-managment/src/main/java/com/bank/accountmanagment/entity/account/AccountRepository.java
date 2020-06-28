@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 	
 	@Modifying
-	@Query("UPDATE Account A SET A.balance = A.balance + ?1 WHERE A.accountNumber= ?2")
+	@Query("update Account a set a.balance = a.balance + ?1 where a.accountNumber= ?2")
 	public boolean setBalanceById(BigDecimal balance,Integer AccountId);
 }

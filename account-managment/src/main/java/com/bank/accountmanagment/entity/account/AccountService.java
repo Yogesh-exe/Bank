@@ -4,9 +4,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Service;
 
 import com.bank.accountmanagment.domain.request.AccountRequest;
@@ -17,9 +14,14 @@ import com.bank.accountmanagment.exception.AccountNotFoundException;
 @Transactional
 public class AccountService {
 
-	@Autowired
+
 	AccountRepository accountRepository;
 	
+	public AccountService(AccountRepository accountRepository) {
+		super();
+		this.accountRepository = accountRepository;
+	}
+
 	public Integer addAccount(Account account) {
 		Account savedAccount = accountRepository.save(account);
 		return savedAccount.getAccountNumber();

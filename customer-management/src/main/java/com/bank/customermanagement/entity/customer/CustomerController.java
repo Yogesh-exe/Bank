@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +25,12 @@ import com.bank.customermanagement.exception.CustomerNotFoundException;
 @RequestMapping("/customer")
 public class CustomerController {
 	
-	@Autowired
 	private CustomerService customerService;
+	
+	public CustomerController(CustomerService customerService) {
+		super();
+		this.customerService = customerService;
+	}
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -43,6 +46,8 @@ public class CustomerController {
 		return ResponseEntity.created(location).build();
 	}
 	
+
+
 	@GetMapping("/{customerId}")
 	public Optional<Customer> retrieveCustomer(@PathVariable("customerId") final Long customerId) {
 		

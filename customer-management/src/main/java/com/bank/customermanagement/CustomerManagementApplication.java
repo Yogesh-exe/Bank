@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.bank.customermanagement.domain.mapper.CustomerRequestEntityMapper;
-import com.bank.customermanagement.domain.mapper.ICustomerRequestEntityMapper;
 
 @SpringBootApplication
 public class CustomerManagementApplication {
