@@ -1,0 +1,13 @@
+server:
+ #error:
+  #include-stacktrace:
+ port: 9070
+debug: true
+spring:
+  application:
+    name: account-managment
+  h2:
+   console:
+    settings:
+        web-allow-others: true
+    enabled: true

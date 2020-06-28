@@ -1,0 +1,9 @@
+server:
+ error:
+  include-stacktrace: never port: 9090
+debug: true
+spring:  application:    name: customer-managment
+  h2:
+   console:
+    settings:        web-allow-others: true
+    enabled: true
