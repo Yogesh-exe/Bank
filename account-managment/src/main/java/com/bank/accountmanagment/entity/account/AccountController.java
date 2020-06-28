@@ -1,6 +1,5 @@
 package com.bank.accountmanagment.entity.account;
 
-import java.math.BigDecimal;
 
 import javax.validation.Valid;
 
@@ -36,14 +35,14 @@ public class AccountController {
 	}
 	
 	@PutMapping(value ="/credit",consumes = "application/json", produces = "application/json")
-	public BigDecimal creditIntoAccount(@RequestBody @Valid AccountRequest accountRequest) {
+	public boolean creditIntoAccount(@RequestBody @Valid AccountRequest accountRequest) {
 		
-		return null;
+		return accountService.credit(accountRequest);
 	}
 	@PutMapping(value = "/debit",consumes = "application/json", produces = "application/json")
-	public BigDecimal debitFromAccount(@RequestBody AccountRequest accountRequest) {
+	public boolean debitFromAccount(@RequestBody AccountRequest accountRequest) {
 		
-		return null;
+		return accountService.debit(accountRequest);
 	}
 	
 	@GetMapping("/hello")
