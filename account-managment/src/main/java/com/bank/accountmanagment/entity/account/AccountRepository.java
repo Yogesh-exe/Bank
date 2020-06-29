@@ -11,5 +11,5 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 	
 	@Modifying
 	@Query("update Account a set a.balance = a.balance + ?1 where a.accountNumber= ?2")
-	public boolean setBalanceById(BigDecimal balance,Integer AccountId);
+	public int setBalanceById(BigDecimal balance,Integer AccountId);
 }

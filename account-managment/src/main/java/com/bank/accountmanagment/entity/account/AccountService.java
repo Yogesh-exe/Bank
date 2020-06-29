@@ -44,18 +44,18 @@ public class AccountService {
 	}
 	
 
-	synchronized public boolean credit(AccountRequest accountRequest) {
-		boolean operationStatus = accountRepository.setBalanceById(accountRequest.getAmount(), accountRequest.getAccountNumber());
+	synchronized public int credit(AccountRequest accountRequest) {
+		int operationStatus = accountRepository.setBalanceById(accountRequest.getAmount(), accountRequest.getAccountNumber());
 		return operationStatus;	
 	}
 
-	synchronized public boolean  debit(AccountRequest accountRequest) {
-		boolean operationStatus = accountRepository.setBalanceById(accountRequest.getAmount(), accountRequest.getAccountNumber());
+	synchronized public int  debit(AccountRequest accountRequest) {
+		int operationStatus = accountRepository.setBalanceById(accountRequest.getAmount(), accountRequest.getAccountNumber());
 		return operationStatus;	
 	}
 	
 	synchronized public boolean transfer(TransferRequest transferRequest) {
-		boolean operationStatus = (debit(transferRequest.getFrom()) && credit(transferRequest.getTo()));
+		boolean operationStatus = (debit(transferRequest.getFrom())==1 && credit(transferRequest.getTo())==1);
 		return operationStatus;	
 	}
 

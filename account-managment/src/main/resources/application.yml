@@ -2,7 +2,7 @@ server:
  #error:
   #include-stacktrace:
  port: 9070
-debug: true
+debug: false
 spring:
   application:
     name: account-managment

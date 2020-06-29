@@ -3,7 +3,9 @@ package com.bank.accountmanagment.entity.account;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +20,15 @@ import com.bank.accountmanagment.domain.request.AccountRequest;
 @RequestMapping("/account")
 public class AccountController {
 	
-	@Autowired
+	
 	private AccountService accountService;
+	
+	Logger logger = LoggerFactory.getLogger(AccountController.class); 
+
+	public AccountController(AccountService accountService) {
+		super();
+		this.accountService = accountService;
+	}
 
 	@PostMapping("/add")
 	public Integer addAccount(@RequestBody String mobile ) {
@@ -35,12 +44,13 @@ public class AccountController {
 	}
 	
 	@PutMapping(value ="/credit",consumes = "application/json", produces = "application/json")
-	public boolean creditIntoAccount(@RequestBody @Valid AccountRequest accountRequest) {
-		
-		return accountService.credit(accountRequest);
+	public int creditIntoAccount(@RequestBody @Valid AccountRequest accountRequest) {
+	int done = accountService.credit(accountRequest);
+	ResponseEntity.ok();
+		return done;
 	}
 	@PutMapping(value = "/debit",consumes = "application/json", produces = "application/json")
-	public boolean debitFromAccount(@RequestBody AccountRequest accountRequest) {
+	public int debitFromAccount(@RequestBody AccountRequest accountRequest) {
 		
 		return accountService.debit(accountRequest);
 	}

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,13 +16,18 @@ public class CustomerService {
 	
 	private static final String ACCOUNT_SERVICE_ADD_URL = "http://localhost:9070/account/add";
 
-	@Autowired
 	private ICustomerRequestEntityMapper customerRequestEntityMapper;
-	
-	@Autowired
+
 	private CustomerRepository customerRepository;
+
 	
-	
+	public CustomerService(ICustomerRequestEntityMapper customerRequestEntityMapper,
+			CustomerRepository customerRepository) {
+		super();
+		this.customerRequestEntityMapper = customerRequestEntityMapper;
+		this.customerRepository = customerRepository;
+	}
+
 	public Customer addCustomer(@Valid CustomerRequest customerRequest)  {
 
 		Customer customer = customerRequestEntityMapper.map(customerRequest);
