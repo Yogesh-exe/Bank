@@ -5,7 +5,7 @@ import javax.inject.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bank.customermanagement.domain.requests.CustomerRequest;
-import com.bank.customermanagement.entity.customer.Customer;
+import com.bank.customermanagement.entity.Customer;
 
 
 public class CustomerRequestEntityMapper implements ICustomerRequestEntityMapper {

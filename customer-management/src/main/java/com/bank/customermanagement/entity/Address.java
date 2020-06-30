@@ -1,4 +1,4 @@
-package com.bank.customermanagement.entity.address;
+package com.bank.customermanagement.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

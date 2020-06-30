@@ -1,4 +1,4 @@
-package com.bank.customermanagement.entity.customer;
+package com.bank.customermanagement.controller;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.bank.customermanagement.domain.requests.CustomerRequest;
+import com.bank.customermanagement.entity.Customer;
 import com.bank.customermanagement.exception.CustomerNotFoundException;
+import com.bank.customermanagement.services.CustomerService;
 
 @RestController
 @RequestMapping("/customer")
@@ -38,8 +40,8 @@ public class CustomerController {
 	public ResponseEntity<Customer> createCustomer(@Valid @RequestBody CustomerRequest customer) {
 		logger.error(customer.toString());
 		 Customer addedCustomer = customerService.addCustomer(customer);
-		 URI location = ServletUriComponentsBuilder
-				 .fromUriString("/{customerId}")
+		 URI location = ServletUriComponentsBuilder.fromCurrentServletMapping()
+				 .path("/{customerId}")
 				 .buildAndExpand(new HashMap<String,String>().put("customerId", Long.toString(addedCustomer.getCustomerId())))
 				 .toUri();
 		 System.out.println("location"+location.toString());

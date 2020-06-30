@@ -1,4 +1,4 @@
-package com.bank.customermanagement.entity.customer;
+package com.bank.customermanagement.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.bank.customermanagement.domain.mapper.ICustomerRequestEntityMapper;
 import com.bank.customermanagement.domain.requests.CustomerRequest;
+import com.bank.customermanagement.entity.Customer;
+import com.bank.customermanagement.repostitories.CustomerRepository;
 
 @Service
 public class CustomerService {
@@ -31,10 +33,11 @@ public class CustomerService {
 	public Customer addCustomer(@Valid CustomerRequest customerRequest)  {
 
 		Customer customer = customerRequestEntityMapper.map(customerRequest);
-	
-		Integer accountNumber = new RestTemplate().postForObject(ACCOUNT_SERVICE_ADD_URL, customer.getDetails().getMobile(), Integer.class);
-		customer.setAccountNumber(accountNumber);
+		customer.setAccountNumber(0);
 		Customer savedCustomer = customerRepository.save(customer);
+		Integer accountNumber = new RestTemplate().postForObject(ACCOUNT_SERVICE_ADD_URL, savedCustomer.getCustomerId(), Integer.class);
+		customer.setAccountNumber(accountNumber);
+		 savedCustomer = customerRepository.save(customer);
 		return savedCustomer;
 	}
 

@@ -1,5 +1,7 @@
-package com.bank.accountmanagment.entity.account;
+package com.bank.accountmanagment.services;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -8,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.bank.accountmanagment.domain.request.AccountRequest;
 import com.bank.accountmanagment.domain.request.TransferRequest;
+import com.bank.accountmanagment.entity.Account;
 import com.bank.accountmanagment.exception.AccountNotFoundException;
+import com.bank.accountmanagment.repositories.AccountRepository;
 
 @Service
 @Transactional
@@ -31,10 +35,12 @@ public class AccountService {
 		Optional<Account> account = accountRepository.findById(accountId);
 		 if(account.isPresent()) {
 		
-//			 EntityModel<Account> accountres= EntityModel.of(account.get());
+Locale india= Locale.ENGLISH;
+			//			 EntityModel<Account> accountres= EntityModel.of(account.get());
 //			 ControllerLinkBuilder linksTo = 
 //					 ControllerLinkBuilder.linkTo(this.credit(accountRequest), parameters)
 //			 
+			 NumberFormat.getCurrencyInstance(india).format( account.get().getBalance());
 			 return account.get();
 		 
 		 }
@@ -50,7 +56,7 @@ public class AccountService {
 	}
 
 	synchronized public int  debit(AccountRequest accountRequest) {
-		int operationStatus = accountRepository.setBalanceById(accountRequest.getAmount(), accountRequest.getAccountNumber());
+		int operationStatus = accountRepository.setBalanceById(accountRequest.getAmount().negate(), accountRequest.getAccountNumber());
 		return operationStatus;	
 	}
 	

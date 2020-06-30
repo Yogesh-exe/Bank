@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
-import com.bank.customermanagement.entity.address.Address;
+import com.bank.customermanagement.entity.Address;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

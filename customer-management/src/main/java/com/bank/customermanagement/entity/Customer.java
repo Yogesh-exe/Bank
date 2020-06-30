@@ -1,4 +1,4 @@
-package com.bank.customermanagement.entity.customer;
+package com.bank.customermanagement.entity;
 
 
 import javax.persistence.Embedded;

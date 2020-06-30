@@ -16,10 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.bank.customermanagement.domain.requests.CustomerRequest;
-import com.bank.customermanagement.entity.account.Account;
-import com.bank.customermanagement.entity.address.Address;
-import com.bank.customermanagement.entity.customer.Customer;
-import com.bank.customermanagement.entity.customer.CustomerService;
+import com.bank.customermanagement.entity.Customer;
+import com.bank.customermanagement.entity.Address;
+import com.bank.customermanagement.services.CustomerService;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

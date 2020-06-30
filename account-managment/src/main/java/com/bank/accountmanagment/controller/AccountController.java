@@ -1,4 +1,4 @@
-package com.bank.accountmanagment.entity.account;
+package com.bank.accountmanagment.controller;
 
 
 import javax.validation.Valid;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.accountmanagment.domain.request.AccountRequest;
+import com.bank.accountmanagment.entity.Account;
+import com.bank.accountmanagment.services.AccountService;
 
 @RestController
 @RequestMapping("/account")
@@ -31,8 +33,9 @@ public class AccountController {
 	}
 
 	@PostMapping("/add")
-	public Integer addAccount(@RequestBody String mobile ) {
-		Account account = new Account();
+	public Integer addAccount(@RequestBody Long customerId ) {
+		logger.info("Entering addAccount");
+		Account account = new Account(customerId);
 		 Integer addAccount = accountService.addAccount(account);
 		 return addAccount;
 	}
