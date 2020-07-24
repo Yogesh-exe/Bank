@@ -38,7 +38,7 @@ public class CustomerController {
 
 	@PostMapping("/add")
 	public ResponseEntity<Customer> createCustomer(@Valid @RequestBody CustomerRequest customer) {
-		logger.error(customer.toString());
+		logger.info("Create new Customer: {}",customer.toString());
 		 Customer addedCustomer = customerService.addCustomer(customer);
 		 URI location = ServletUriComponentsBuilder.fromCurrentServletMapping()
 				 .path("/{customerId}")

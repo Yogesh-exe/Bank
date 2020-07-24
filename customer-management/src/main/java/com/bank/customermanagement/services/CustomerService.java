@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,6 +13,7 @@ import com.bank.customermanagement.domain.mapper.ICustomerRequestEntityMapper;
 import com.bank.customermanagement.domain.requests.CustomerRequest;
 import com.bank.customermanagement.entity.Customer;
 import com.bank.customermanagement.repostitories.CustomerRepository;
+import com.bank.customermanagement.validations.RequestValidation;
 
 @Service
 public class CustomerService {
@@ -21,8 +23,14 @@ public class CustomerService {
 	private ICustomerRequestEntityMapper customerRequestEntityMapper;
 
 	private CustomerRepository customerRepository;
-
 	
+	private RequestValidation<CustomerRequest> requestValidator;
+
+	@Autowired
+	public void setRequestValidator(RequestValidation<CustomerRequest> requestValidator) {
+		this.requestValidator = requestValidator;
+	}
+
 	public CustomerService(ICustomerRequestEntityMapper customerRequestEntityMapper,
 			CustomerRepository customerRepository) {
 		super();
@@ -31,6 +39,8 @@ public class CustomerService {
 	}
 
 	public Customer addCustomer(@Valid CustomerRequest customerRequest)  {
+		
+		requestValidator.validate();
 
 		Customer customer = customerRequestEntityMapper.map(customerRequest);
 		customer.setAccountNumber(0);
