@@ -5,7 +5,7 @@ server:
 debug: false
 spring:
   application:
-    name: account-managment
+    name: bank-account-managment
   h2:
    console:
     settings:

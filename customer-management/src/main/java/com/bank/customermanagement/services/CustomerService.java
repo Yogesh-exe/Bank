@@ -5,15 +5,14 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.bank.customermanagement.domain.mapper.ICustomerRequestEntityMapper;
 import com.bank.customermanagement.domain.requests.CustomerRequest;
 import com.bank.customermanagement.entity.Customer;
+import com.bank.customermanagement.exception.CustomerNotFoundException;
 import com.bank.customermanagement.repostitories.CustomerRepository;
-import com.bank.customermanagement.validations.RequestValidation;
 
 @Service
 public class CustomerService {
@@ -24,12 +23,6 @@ public class CustomerService {
 
 	private CustomerRepository customerRepository;
 	
-	private RequestValidation<CustomerRequest> requestValidator;
-
-	@Autowired
-	public void setRequestValidator(RequestValidation<CustomerRequest> requestValidator) {
-		this.requestValidator = requestValidator;
-	}
 
 	public CustomerService(ICustomerRequestEntityMapper customerRequestEntityMapper,
 			CustomerRepository customerRepository) {
@@ -40,8 +33,6 @@ public class CustomerService {
 
 	public Customer addCustomer(@Valid CustomerRequest customerRequest)  {
 		
-		requestValidator.validate();
-
 		Customer customer = customerRequestEntityMapper.map(customerRequest);
 		customer.setAccountNumber(0);
 		Customer savedCustomer = customerRepository.save(customer);
@@ -59,6 +50,15 @@ public class CustomerService {
 	public List<Customer> findall() {
 		// TODO Auto-generated method stub
 		return customerRepository.findAll();
+	}
+
+	public Customer updateCustomer(Long customerId, CustomerRequest customerRequest) {
+		Customer retrivedCustomerToUpdate = retrieveCustomer(customerId).orElseThrow(()->new CustomerNotFoundException(customerId));
+		
+		//Customer customerDetailsToUpdate = customerRequestEntityMapper.map(customerRequest);
+		retrivedCustomerToUpdate.setDetails(customerRequest);
+		
+		return customerRepository.save(retrivedCustomerToUpdate);
 	}
 
 }

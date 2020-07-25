@@ -8,8 +8,8 @@ public class CustomerNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = -7122860871081747752L;
 
-	public CustomerNotFoundException(String message) {
-		super(message);
+	public CustomerNotFoundException(Long customerId) {
+		super(Long.toString(customerId));
 		// TODO Auto-generated constructor stub
 	}
 	
