@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bank</groupId>
-	<artifactId>account-management</artifactId>
+	<artifactId>customer-management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>account-management</name>
-	<description>Demo project for Bank Account Managment</description>
+	<description>Demo project for Bank Customer Managment</description>
 
 	<properties>
 		<java.version>11</java.version>
