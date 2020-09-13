@@ -1,3 +1,3 @@
 # Bank
 
-SImple rest based ms for bank managments
+Simple rest based microservices for bank managment.
